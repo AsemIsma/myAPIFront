@@ -5,14 +5,13 @@ async function fetchData() {
   try {
     const response = await fetch("https://foodster-idg1.onrender.com/api/dishes");
 
-    let dishId = [];
     if (!response.ok) {
       throw new Error("Could not fetch resource");
     }
 
     const data = await response.json();
 
-    console.log(data);
+    let chsnDId = 0;
 
     for (let i = 0; i < data.length; i++) {
       document.querySelector(".all-dishes").innerHTML += `
@@ -27,20 +26,18 @@ async function fetchData() {
       <p>author: ${data[i].author}</p>
       </div>
       `;
-      dishId.push("dish" + i);
     }
 
     for (let i = 0; i < data.length; i++) {
       document.querySelector(`#dish${i}`).addEventListener("click", () => {
-        const target = document.querySelector(`.choosen${i + 1} h2`);
-          target.innerHTML = data[i].dishName;
-          document.querySelector(`.choosen${i + 1} img`).src = data[i].dishImgSrc;
-          console.log("something happen")
-      });
+        chsnDId = chsnDId + 1;
+        document.querySelector(`.choosen${chsnDId} h2`).innerHTML = data[i].dishName;
+        document.querySelector(`.choosen${chsnDId} img`).src = data[i].dishImgSrc;
+        return chsnDId
+        });
+      };
     }
-
-    console.log(dishId)
-  }
+  
   catch (error) {
     console.error(error);
   }
