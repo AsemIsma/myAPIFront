@@ -1,5 +1,6 @@
-// fetch("https://foodster-idg1.onrender.com/api/dishes/2")
 fetchData()
+
+let allIng = [];
 
 async function fetchData() {
   try {
@@ -34,12 +35,16 @@ async function fetchData() {
         if (document.querySelector(`.choosen${chsnDId}`)) {
           document.querySelector(`.choosen${chsnDId} h2`).innerHTML = data[i].dishName;
           document.querySelector(`.choosen${chsnDId} img`).src = data[i].dishImgSrc;
+          allIng.push(data[i].dishIngredients.map(el => el.join(' ')).join(' <br>'));
+          document.querySelector(".combIng").innerHTML = allIng.join(' <br>');
           return chsnDId
         } else {
           alert("Cart is full");
+          console.log(allIng.join(' '))
         }
         });
       };
+      
     }
   
   catch (error) {
