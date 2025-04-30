@@ -31,9 +31,13 @@ async function fetchData() {
     for (let i = 0; i < data.length; i++) {
       document.querySelector(`#dish${i}`).addEventListener("click", () => {
         chsnDId = chsnDId + 1;
-        document.querySelector(`.choosen${chsnDId} h2`).innerHTML = data[i].dishName;
-        document.querySelector(`.choosen${chsnDId} img`).src = data[i].dishImgSrc;
-        return chsnDId
+        if (document.querySelector(`.choosen${chsnDId}`)) {
+          document.querySelector(`.choosen${chsnDId} h2`).innerHTML = data[i].dishName;
+          document.querySelector(`.choosen${chsnDId} img`).src = data[i].dishImgSrc;
+          return chsnDId
+        } else {
+          alert("Cart is full");
+        }
         });
       };
     }
