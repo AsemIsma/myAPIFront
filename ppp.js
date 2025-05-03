@@ -44,10 +44,11 @@ async function fetchData() {
           allIng.push(dish.dishIngredients.map(el => el.join(' ')).join(' <br>'));
           combIng.push(dish.dishIngredients);
         } else {
+          combIfSameIng();
           alert("Cart is full");
           console.log(allIng);
           console.log(combIng);
-          combIfSameIng();
+          
         }
       });
     });
